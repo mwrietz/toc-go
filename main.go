@@ -27,16 +27,16 @@ func main() {
 	path := os.Args[0]
 	var s = filepath.Base(path)
 	fmt.Println(green(s), ": v0.1.0\n")
-    TuiPageCheck()
+	TuiPageCheck()
 
-	// get a list of files in cwd and subdirs 
+	// get a list of files in cwd and subdirs
 	filelist := FileListTREE()
 
 	for _, file := range filelist {
-        if !strings.HasPrefix(file, ".") {
-            fmt.Println(blue(file))
-        }
-        TuiPageCheck()
+		if !strings.HasPrefix(file, ".") {
+			fmt.Println(blue(file))
+		}
+		TuiPageCheck()
 
 		linecount := 0
 		var multiline_import = false
@@ -60,19 +60,19 @@ func main() {
 				if strings.HasPrefix(buffer, "func") {
 					lc := fmt.Sprintf("%6d", linecount)
 					fmt.Println(red(lc), ":", strings.TrimSuffix(buffer, "{"))
-                    TuiPageCheck()
+					TuiPageCheck()
 				}
 
 				if strings.HasPrefix(buffer, "package") {
 					lc := fmt.Sprintf("%6d", linecount)
 					fmt.Println(red(lc), ":", yellow(buffer))
-                    TuiPageCheck()
+					TuiPageCheck()
 				}
 
 				if strings.HasPrefix(buffer, "import") {
 					lc := fmt.Sprintf("%6d", linecount)
 					fmt.Println(red(lc), ":", cyan(buffer))
-                    TuiPageCheck()
+					TuiPageCheck()
 					if strings.Contains(buffer, "(") {
 						multiline_import = true
 					}
@@ -81,7 +81,7 @@ func main() {
 					if !strings.Contains(buffer, "(") {
 						lc := fmt.Sprintf("%6d", linecount)
 						fmt.Println(red(lc), ":", cyan(buffer))
-                        TuiPageCheck()
+						TuiPageCheck()
 					}
 					if strings.Contains(buffer, ")") {
 						multiline_import = false
@@ -91,14 +91,14 @@ func main() {
 				if strings.HasPrefix(buffer, "type") {
 					lc := fmt.Sprintf("%6d", linecount)
 					fmt.Println(red(lc), ":", magenta(buffer))
-                    TuiPageCheck()
+					TuiPageCheck()
 					multiline_type = true
 				}
 				if multiline_type == true {
 					if !strings.Contains(buffer, "{") {
 						lc := fmt.Sprintf("%6d", linecount)
 						fmt.Println(red(lc), ":", magenta(buffer))
-                        TuiPageCheck()
+						TuiPageCheck()
 					}
 					if strings.Contains(buffer, "}") {
 						multiline_type = false
@@ -108,9 +108,8 @@ func main() {
 			if err := scanner.Err(); err != nil {
 				log.Fatal(err)
 			}
-            fmt.Println()
-            TuiPageCheck()
+			fmt.Println()
+			TuiPageCheck()
 		}
 	}
 }
-

@@ -4,7 +4,7 @@ import (
 	"bufio"
 	"bytes"
 	"fmt"
-    "github.com/gookit/color"
+	"github.com/gookit/color"
 	"golang.org/x/term"
 	"os"
 	"os/exec"
@@ -13,7 +13,6 @@ import (
 	"strings"
 )
 
-
 func TuiClear() {
 	cmd := exec.Command("clear")
 	cmd.Stdout = os.Stdout
@@ -21,25 +20,25 @@ func TuiClear() {
 }
 
 func TuiPageCheck() {
-    _, height := TuiSize()
-    _, row := TuiCursorPos()
-    //row := 10
-    //fmt.Println("row: ", row, "height: ", height)
-    if row > (height - 5) {
-        fmt.Println()
-        TuiPause()
-        TuiClear()
-    }
+	_, height := TuiSize()
+	_, row := TuiCursorPos()
+	//row := 10
+	//fmt.Println("row: ", row, "height: ", height)
+	if row > (height - 5) {
+		fmt.Println()
+		TuiPause()
+		TuiClear()
+	}
 }
 
 func TuiPause() {
-    green := color.FgGreen.Render
-    width, _ := TuiSize()
-    for i := 1; i < (width/2 - 15); i++ {
-        fmt.Print(" ")
-    }
-    fmt.Println(green("press Enter key to continue..."))
-    fmt.Scanln()
+	green := color.FgGreen.Render
+	width, _ := TuiSize()
+	for i := 1; i < (width/2 - 15); i++ {
+		fmt.Print(" ")
+	}
+	fmt.Println(green("press Enter key to continue..."))
+	fmt.Scanln()
 }
 
 func TuiSize() (int, int) {
@@ -80,7 +79,7 @@ func TuiCursorPos() (int, int) {
 
 	// by printing the command output, we are triggering input
 	fmt.Print(randomBytes)
-    fmt.Printf("\033[%dA", 1)
+	fmt.Printf("\033[%dA", 1)
 	// capture the triggered stdin from the print
 	text, _ := reader.ReadSlice('R')
 
